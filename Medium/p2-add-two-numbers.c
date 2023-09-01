@@ -55,29 +55,23 @@ struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) {
 
     while (temp1 != NULL && temp2 != NULL) {
         output = append(output, (temp1->val + temp2->val + change) % 10);
-        if (temp1->val + temp2->val + change >= 10) {
-            change = 1;
-        } else
-            change = 0;
+        change = (temp1->val + temp2->val + change) / 10;
+
         temp1 = temp1->next;
         temp2 = temp2->next;
     }
 
     while (temp1 != NULL) {
         output = append(output, (temp1->val + change) % 10);
-        if (temp1->val + change >= 10) {
-            change = 1;
-        } else
-            change = 0;
+        change = (temp1->val + change) / 10;
+
         temp1 = temp1->next;
     }
 
     while (temp2 != NULL) {
         output = append(output, (temp2->val + change) % 10);
-        if (temp2->val + change >= 10) {
-            change = 1;
-        } else
-            change = 0;
+        change = (temp2->val + change) / 10;
+        
         temp2 = temp2->next;
     }
 
