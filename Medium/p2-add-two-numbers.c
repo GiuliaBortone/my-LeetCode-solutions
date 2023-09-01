@@ -49,30 +49,18 @@ void printList(struct ListNode *head) {
  * The two given non-empty lists represents two non-negative integers (digits stored in reverse order, one digit per node).
  */
 struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) {
-    struct ListNode *temp1 = l1, *temp2 = l2;
     struct ListNode *output = NULL;
     int change = 0;
 
-    while (temp1 != NULL && temp2 != NULL) {
-        output = append(output, (temp1->val + temp2->val + change) % 10);
-        change = (temp1->val + temp2->val + change) / 10;
+    while (l1 != NULL || l2 != NULL) {
+        int n1 = (l1 != NULL) ? l1->val : 0;
+        int n2 = (l2 != NULL) ? l2->val : 0;
 
-        temp1 = temp1->next;
-        temp2 = temp2->next;
-    }
+        output = append(output, (n1 + n2 + change) % 10);
+        change = (n1 + n2 + change) / 10;
 
-    while (temp1 != NULL) {
-        output = append(output, (temp1->val + change) % 10);
-        change = (temp1->val + change) / 10;
-
-        temp1 = temp1->next;
-    }
-
-    while (temp2 != NULL) {
-        output = append(output, (temp2->val + change) % 10);
-        change = (temp2->val + change) / 10;
-        
-        temp2 = temp2->next;
+        l1 = (l1 != NULL) ? l1->next : NULL;
+        l2 = (l2 != NULL) ? l2->next : NULL;
     }
 
     if (change == 1) {
